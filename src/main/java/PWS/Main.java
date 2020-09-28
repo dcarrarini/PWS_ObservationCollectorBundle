@@ -4,6 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import dbop.MySQLConnector;
 import dbop.MySQLdbopDailyObs;
 
@@ -17,14 +20,15 @@ public class Main {
             RCO.setApiKey(ApiKey);
             RCO.setStationID(StationID);
             JSONArray currentObservationArray = RCO.getCurrentObservation();
-            JSONArray dailyObservationArray = RCO.getDailyObservation();
+            JSONArray dailyObservationArray = RCO.getDailyObservation(DateUtil.getSysdate("yyyyMMdd"));
             System.out.println(dailyObservationArray.length());
+
             //Connessione MYSQL
-	            /*
+	          /*
 	            MySQLConnector msc = new MySQLConnector();
 	            Connection dcConn = MySQLConnector.getMYSQLDBConnection();
 	            System.out.println(dcConn.getClass());
-	            */
+	           */
 
             //DAILY OBSERVATION
             try {
@@ -43,8 +47,6 @@ public class Main {
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-
-
             //CURRENT OBSERVATION
             try {
                 Observation observation = RCO.createCurrentObservation(currentObservationArray);

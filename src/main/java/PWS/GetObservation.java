@@ -112,12 +112,12 @@ public class GetObservation {
         return observation;
     }
 
-    public JSONArray getDailyObservation() {
+    public JSONArray getDailyObservation(String sTS) {
         JSONObject obj;
         JSONArray observation = null;
         try {
             String sURL = "https://api.weather.com/v2/pws/history/all?stationId=" + this.getStationID()
-                    + "&format=json&units=m&date=20200921&apiKey=" + this.getApiKey();
+                    + "&format=json&units=m&date="+sTS+"&apiKey=" + this.getApiKey();
             URL url = new URL(sURL);
             // Gestione della risposta
             System.out.println(url);
@@ -217,44 +217,4 @@ public class GetObservation {
         }
         return dailyObservation;
     }
-	/*
-	public DailyObservation createDailyObservation(JSONObject obs) {
-
-		DailyObservation dailyObservation = null;
-		try {
-			//for (int i = 0; i < observation.length(); i++) {
-				//JSONObject obs = observation.getJSONObject(i);
-				JSONObject ObservationMetric = obs.getJSONObject("metric");
-				stationID = observation.getJSONObject(i).getString("stationID");
-				obsTimeUtc = observation.getJSONObject(i).getString("obsTimeUtc");
-				obsTimeLocal = observation.getJSONObject(i).getString("obsTimeLocal");
-				solarRadiation = String.valueOf(observation.getJSONObject(i).getDouble("solarRadiationHigh"));
-				lon = String.valueOf(observation.getJSONObject(i).getDouble("lon"));
-				lat = String.valueOf(observation.getJSONObject(i).getDouble("lat"));
-				uv = String.valueOf(observation.getJSONObject(i).getDouble("uvHigh"));
-				winddir = String.valueOf(observation.getJSONObject(i).getDouble("winddirAvg"));
-				humidity = String.valueOf(observation.getJSONObject(i).getDouble("humidityAvg"));
-				temp = String.valueOf(ObservationMetric.getDouble("tempAvg"));
-				heatIndex = String.valueOf(ObservationMetric.getDouble("heatindexAvg"));
-				dewpt = String.valueOf(ObservationMetric.getDouble("dewptAvg"));
-				windChill = String.valueOf(ObservationMetric.getDouble("windchillAvg"));
-				windSpeed = String.valueOf(ObservationMetric.getDouble("windspeedAvg"));
-				windGust = String.valueOf(ObservationMetric.getDouble("windgustAvg"));
-				pressureMax = String.valueOf(ObservationMetric.getDouble("pressureMax"));
-				pressureMin = String.valueOf(ObservationMetric.getDouble("pressureMin"));
-				pressureTrend = String.valueOf(ObservationMetric.getDouble("pressureTrend"));
-				precipRate = String.valueOf(ObservationMetric.getDouble("precipRate"));
-				precipTotal = String.valueOf(ObservationMetric.getDouble("precipTotal"));
-				elev = "";
-				dailyObservation = new DailyObservation(stationID, obsTimeUtc, obsTimeLocal, solarRadiation, lon, lat,
-						uv, winddir, humidity, temp, heatIndex, dewpt, windChill, windSpeed, windGust, pressureMax,
-						pressureMin, pressureTrend, precipRate, precipTotal);
-
-		//	}
-		} catch (JSONException e1) {
-			e1.printStackTrace();
-		}
-		return dailyObservation;
-	}*/
-
 }
