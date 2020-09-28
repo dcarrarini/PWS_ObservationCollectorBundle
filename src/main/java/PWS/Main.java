@@ -6,10 +6,14 @@ import org.json.JSONObject;
 
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import dbop.MySQLConnector;
 import dbop.MySQLdbopDailyObs;
+
+import static PWS.DateUtil.getDatesBetween;
 
 public class Main {
 
@@ -24,6 +28,15 @@ public class Main {
             JSONArray dailyObservationArray = RCO.getDailyObservation(DateUtil.getYesterdayDateString("yyyyMMdd"));
             System.out.println(dailyObservationArray.length());
 
+            //get localdate per recupero storico
+            LocalDate startDate = LocalDate.parse("2020-03-01");
+            LocalDate endDate = LocalDate.parse("2020-09-27");
+            List<LocalDate> lista =  getDatesBetween(startDate,endDate);
+            for(int i=0;i<lista.size();i++){
+                System.out.println(lista.get(i));
+            }
+
+
             //Connessione MYSQL
 	          /*
 	            MySQLConnector msc = new MySQLConnector();
@@ -31,7 +44,7 @@ public class Main {
 	            System.out.println(dcConn.getClass());
 	           */
 
-
+    /*
             //DAILY OBSERVATION
             try {
                 MySQLConnector mySQLConn = new MySQLConnector();
@@ -56,7 +69,7 @@ public class Main {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+*/
         } catch (Exception e) {
             e.printStackTrace();
         }
