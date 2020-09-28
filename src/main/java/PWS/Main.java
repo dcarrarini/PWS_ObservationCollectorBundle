@@ -1,5 +1,6 @@
 package PWS;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -20,7 +21,7 @@ public class Main {
             RCO.setApiKey(ApiKey);
             RCO.setStationID(StationID);
             JSONArray currentObservationArray = RCO.getCurrentObservation();
-            JSONArray dailyObservationArray = RCO.getDailyObservation(DateUtil.getSysdate("yyyyMMdd"));
+            JSONArray dailyObservationArray = RCO.getDailyObservation(DateUtil.getYesterdayDateString("yyyyMMdd"));
             System.out.println(dailyObservationArray.length());
 
             //Connessione MYSQL
@@ -29,6 +30,7 @@ public class Main {
 	            Connection dcConn = MySQLConnector.getMYSQLDBConnection();
 	            System.out.println(dcConn.getClass());
 	           */
+
 
             //DAILY OBSERVATION
             try {

@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static PWS.DateUtil.alignTS;
+
 public class GetObservation {
 
     static String ApiKey;
@@ -188,7 +190,7 @@ public class GetObservation {
             JSONObject ObservationMetric = obs.getJSONObject("metric");
             stationID = obs.getString("stationID");
             obsTimeUtc = obs.getString("obsTimeUtc");
-            obsTimeLocal = obs.getString("obsTimeLocal");
+            obsTimeLocal = alignTS(obs.getString("obsTimeLocal"));
             solarRadiation = String.valueOf(obs.getDouble("solarRadiationHigh"));
             lon = String.valueOf(obs.getDouble("lon"));
             lat = String.valueOf(obs.getDouble("lat"));
